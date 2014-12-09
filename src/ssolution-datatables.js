@@ -1,23 +1,23 @@
 ;(function($, window, document, undefined) {
 	$.SSolutionTable = function(element, options) {
-		var plugin = this,
+		var _api = this,
 			$element = $(element),
 			defaults = {
 			};
 
-		plugin.settings = {};
+		_api.settings = {};
 
-		plugin.init = function() {
-			plugin.settings = $.extend(true, {}, defaults, options);
+		_api.init = function() {
+			_api.settings = $.extend(true, {}, defaults, options);
 		};
 
-		plugin.foo_public_method = function() {
+		_api.foo_public_method = function() {
 		};
 
 		var foo_private_method = function() {
 		};
 
-		plugin.init();
+		_api.init();
 	};
 
 	$.fn.ssolutionTable = function(options) {
