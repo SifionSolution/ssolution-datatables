@@ -1,3 +1,17 @@
+/**
+ * Some of the best practices:
+ * 
+ * 1: Always use jQuery 'data' method when referring to 'data-attributes'.
+ * 2: Every private function should start with the underscore.
+ * 3: Every event must trigger some event on the $element.
+ * 		e.g.: The user selects a row. Then we do: $element.trigger('ssolution-table:row-selected', [theRow]);
+ * 4: Every event that is triggered by this plugin must start with 'ssolution-table:'.
+ * 5: Most of the workflow will be available for override (using the default).
+ * 6: Every callback function must be called this way: _executeCallback(theFunction, param1, param2);
+ * 		This private method will execute this function and pass _api as this and $element as the first param.
+ * 
+ */
+
 ;(function($, window, document, undefined) {
 	$.SSolutionTable = function(element, options) {
 		var _api = this,
@@ -14,7 +28,18 @@
 		_api.foo_public_method = function() {
 		};
 
-		var foo_private_method = function() {
+		/**
+		 * Executes a callback function if it can be executed.
+		 * Passes _api as this and $element as the first parameter.
+		 * Any additional parameter passed to this function will be passed to the callback.
+		 */
+		var _executeCallback = function(callback) {
+			if (undefined != callback && typeof callback === 'function') {
+				var args = arguments.slice(1);
+				args.unshift($element);
+
+				callback.apply(_api, args);
+			}
 		};
 
 		_api.init();
